@@ -26,30 +26,26 @@ public class CaculadoraController {
 
     private Double getResultado (Double numero1, Double numero2, String operacao) {
         Double resultado;
-        switch (operacao) {
-            case "adicao":
-                resultado = numero1 + numero2;
-                break;
-            case "subtracao":
-                resultado = numero1 - numero2;
-                break;
-            case "multiplicacao":
-                resultado = numero1 * numero2;
-                break;
-            case "divisao":
-                if (numero2 != 0) {
-                    resultado = numero1 / numero2;
-                } else {
-                    resultado = 0.0;
-                }
-                break;
-            default:
+
+        if(operacao.equals("adicao")){
+            resultado = numero1 + numero2;
+            return resultado;
+            
+        }else if(operacao.equals("subtracao")){
+            resultado = numero1 - numero2;
+                return resultado;
+
+        }else if(operacao.equals("multiplicacao")){
+            resultado = numero1 * numero2;
+            return resultado;
+
+        }else if(operacao.equals("divisao")){
+            if(numero2 != 0) {
+                resultado = numero1 / numero2;
+            }else {
                 resultado = 0.0;
-                break;
-        }
-        return resultado;
+            }
+            return resultado;
+        }else return resultado = 0.0;
     }
-
-
-    
 }
