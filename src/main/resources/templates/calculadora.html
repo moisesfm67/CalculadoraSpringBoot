@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <title>Calculadora</title>
+
+    <style>
+      @keyframes move-background {
+        from {
+          -webkit-transform: translate3d(0px, 0px, 0px);
+        }
+        to {
+          -webkit-transform: translate3d(1000px, 0px, 0px);
+        }
+      }
+      @-webkit-keyframes move-background {
+        from {
+          -webkit-transform: translate3d(0px, 0px, 0px);
+        }
+        to {
+          -webkit-transform: translate3d(1000px, 0px, 0px);
+        }
+      }
+
+      @-moz-keyframes move-background {
+        from {
+          -webkit-transform: translate3d(0px, 0px, 0px);
+        }
+        to {
+          -webkit-transform: translate3d(1000px, 0px, 0px);
+        }
+      }
+
+      @-webkit-keyframes move-background {
+        from {
+          -webkit-transform: translate3d(0px, 0px, 0px);
+        }
+        to {
+          -webkit-transform: translate3d(1000px, 0px, 0px);
+        }
+      }
+
+      .background-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+      }
+
+      .stars {
+        background: black
+          url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/stars.png)
+          repeat;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        display: block;
+        z-index: 0;
+      }
+
+      .twinkling {
+        width: 10000px;
+        height: 100%;
+        background: transparent
+          url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/twinkling.png")
+          repeat;
+        background-size: 1000px 1000px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 2;
+
+        -moz-animation: move-background 70s linear infinite;
+        -ms-animation: move-background 70s linear infinite;
+        -o-animation: move-background 70s linear infinite;
+        -webkit-animation: move-background 70s linear infinite;
+        animation: move-background 70s linear infinite;
+      }
+
+      .clouds {
+        width: 10000px;
+        height: 100%;
+        background: transparent
+          url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/clouds_repeat.png")
+          repeat;
+        background-size: 1000px 1000px;
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 3;
+
+        -moz-animation: move-background 150s linear infinite;
+        -ms-animation: move-background 150s linear infinite;
+        -o-animation: move-background 150s linear infinite;
+        -webkit-animation: move-background 150s linear infinite;
+        animation: move-background 150s linear infinite;
+      }
+      img {
+        height: 70vh;
+        width: 70vh;
+        position: absolute;
+        z-index: 3;
+        right: 20px;
+      }
+
+      .wrapper {
+        text-align: center;
+      }
+
+      .wrapper label {
+        color: #fff;
+        font-family: "ubuntu";
+        text-transform: uppercase;
+        font-weight: 700;
+        font-family: "Josefin Sans", sans-serif;
+        background: linear-gradient(
+          to right,
+          #ccc7d8 10%,
+          #57e6e6 50%,
+          #b294ff 60%
+        );
+        background-size: auto auto;
+        background-clip: border-box;
+        background-size: 200% auto;
+        color: #fff;
+        background-clip: text;
+        text-fill-color: transparent;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: textclip 1.5s linear infinite;
+        display: inline-block;
+      }
+
+      @keyframes textclip {
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      section {
+        display: flex;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        text-align: center;
+        justify-content: center;
+        z-index: 5;
+      }
+
+      .webflow-style-input {
+        position: relative;
+        display: flex;
+        margin: 0 auto;
+        border-radius: 2px;
+        background: rgba(57, 63, 84, 0.8);
+      }
+      .webflow-style-input:after {
+        content: "";
+        position: absolute;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        z-index: 999;
+        height: 2px;
+        border-bottom-left-radius: 2px;
+        border-bottom-right-radius: 2px;
+        background-position: 0% 0%;
+        background: linear-gradient(
+          to right,
+          #ccc7d8,
+          #57e6e6,
+          #feffb8,
+          #57e6e6,
+          #b294ff,
+          #57e6e6
+        );
+        background-size: 500% auto;
+        animation: gradient 3s linear infinite;
+      }
+
+      .webflow-style-input input {
+        flex-grow: 1;
+        color: #bfd2ff;
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+        vertical-align: middle;
+        background: transparent;
+        border: none;
+      }
+      .webflow-style-input input::-webkit-input-placeholder {
+        color: #7881a1;
+      }
+
+      #testbutton {
+        width: 150px;
+        height: 50px;
+        border-radius: 180px;
+        position: relative;
+        top: calc(50% - 25px);
+        background: linear-gradient(
+          60deg,
+          #f79533,
+          #f37055,
+          #ef4e7b,
+          #a166ab,
+          #5073b8,
+          #1098ad,
+          #07b39b,
+          #6fba82
+        );
+        cursor: pointer;
+        line-height: 12px;
+      }
+
+      #testbutton:before {
+        content: "";
+        z-index: 1;
+        position: absolute;
+        display: block;
+        width: 80%;
+        height: 70%;
+        top: 15%;
+        left: 10%;
+        transition: 0.3s opacity ease-in-out;
+        filter: blur(15px);
+        opacity: 0;
+        background: linear-gradient(
+          60deg,
+          #f79533,
+          #f37055,
+          #ef4e7b,
+          #a166ab,
+          #5073b8,
+          #1098ad,
+          #07b39b,
+          #6fba82
+        );
+      }
+
+      #testbutton:hover:before {
+        opacity: 1;
+        transition: 0.3s opacity ease-in-out;
+        filter: blur(25px);
+        background: linear-gradient(
+          60deg,
+          #f79533,
+          #f37055,
+          #ef4e7b,
+          #a166ab,
+          #5073b8,
+          #1098ad,
+          #07b39b,
+          #6fba82
+        );
+      }
+
+      #testbutton:after {
+        content: "ENVIAR";
+        text-align: center;
+        line-height: 40px;
+        font-size: 18px;
+        color: rgba(235, 235, 235, 1);
+        font-weight: bold;
+        z-index: 5;
+        position: absolute;
+        display: block;
+        border-radius: 180px;
+        width: 92%;
+        height: 80%;
+        top: 10%;
+        left: 4%;
+        background-color: rgb(19, 20, 22);
+      }
+
+      .select-div {
+        display: flex;
+        text-align: center;
+        justify-content: space-evenly;
+        align-items: center;
+      }
+
+      .select-op {
+        border: none;
+        padding: 1em;
+        outline: none;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-style: 1.2em;
+        letter-spacing: 0.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        background: linear-gradient(
+          60deg,
+          #f79533,
+          #f37055,
+          #ef4e7b,
+          #a166ab,
+          #5073b8,
+          #1098ad,
+          #07b39b,
+          #6fba82
+        );
+      }
+
+      .option-op {
+        border: none;
+        padding: 1em;
+        outline: none;
+        color: white;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-style: 1.2em;
+        letter-spacing: 0.2em;
+        position: relative;
+        z-index: 1;
+        cursor: pointer;
+        background: none;
+        text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.45);
+        background-color: #07b39b;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="background-container">
+      <img
+        src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1231630/moon2.png"
+        alt=""
+      />
+      <div class="stars"></div>
+      <div class="twinkling"></div>
+      <div class="clouds"></div>
+      <section>
+        <form method="POST" action="/calculadora/resultado">
+          <br />
+          <div class="wrapper">
+            <label for="numero1">Digite o primeiro número:</label>
+            <div class="webflow-style-input">
+              <input type="number" id="numero1" name="numero1" required />
+            </div>
+            <br /><br />
+          </div>
+
+          <div class="wrapper">
+            <label for="numero2">Digite o segundo número:</label>
+
+            <div class="webflow-style-input">
+              <input type="number" id="numero2" name="numero2" required />
+            </div>
+            <br /><br />
+          </div>
+
+          <div class="wrapper">
+            <label for="operacao"
+              >Selecione qual operação você deseja efetuar:</label
+            ><br /><br />
+          </div>
+          <div class="select-div">
+            <select class="select-op" name="operacao" id="operacao">
+              <option class="option-op" value="adicao">Adição</option>
+
+              <option class="option-op" value="subtracao">Subtração</option>
+
+              <option class="option-op" value="multiplicacao">
+                Multiplicação
+              </option>
+
+              <option class="option-op" value="divisao">Divisão</option>
+            </select>
+            <button id="testbutton" type="submit">ENVIAR</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
